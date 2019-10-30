@@ -1,31 +1,23 @@
-/*.bublle_for_dict {
-    position: absolute;
-    display: block;
-    padding: 5px 20px 5px 20px;
-    background: rgba(0,0,0,1.0);
-    color: white;
-    font-size: 13px;
-    border-radius: 4px;
-    max-width: calc(100vw - 40px);
-  }*/
 
-.bublle_for_dict {
+.bublle4dict {
   z-index: 99999999;
-  background-color:#3e60ce;
-  border-radius:4px;
+  background-color:#dde0e9 !important;
+  border-radius:1px;
   cursor:pointer;
   font-family:Arial;
   font-size:15px;
   width: auto;
   height: auto;
   position: absolute;
+  border-left: 6px solid rgb(65, 68, 66)!important
 }
 
 
-.bublle_for_dict li { 
+.bublle4dict li { 
    border-bottom:1px solid #f0eaea; 
    padding:8px 16px;
-
+   display: inline-block;
+   border-right: 1px solid whitesmoke;
 }
 
 #_container {
@@ -36,30 +28,14 @@
   padding: auto;
 }
 
-._btns {
+._btns a {
   text-decoration: none; /*使text下方不出现underline*/
   position: relative;
-  display: block;
   padding: auto;
-  color: #f1e9e9;
-}
-
-.btns:hover {
-  text-decoration: none;
+  color: #201e1e !important; 
 }
 
 #container li:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-
-
-/*psudeo状态似乎会阻止a href 打开*/
-/*
-.bublle_for_dict:hover {
-  background-color:#5cbf2a;
-}
-.bublle_for_dict:active {
-  position:relative;
-  top:1px;
-}*/
 
