@@ -20,20 +20,27 @@
    border-right: 1px solid whitesmoke;
 }
 
+.bublle4dict li:hover {
+  transition: background 0.5s;
+  background: #bcbfc5;
+} 
+
 #_container {
   list-style: none;
   position: relative;
   align-self: center;
   margin: auto;
-  padding: auto;
+  padding: 0px 0px 0px 0.5rem  !important;
 }
 
 ._btns a {
   text-decoration: none; /*使text下方不出现underline*/
   position: relative;
-  padding: auto;
   color: #201e1e !important; 
 }
+
+
+
 
 #container li:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
