@@ -1,6 +1,6 @@
 'use strict';
 //突破wsj
-chrome.webRequest.onBeforeRequest.addListener(function (details) {
+/* chrome.webRequest.onBeforeRequest.addListener(function (details) {
 console.log(details);
 console.debug(details.url.indexOf("wsj"));
   var updatedUrl;
@@ -13,7 +13,7 @@ console.debug(details.url.indexOf("wsj"));
 //arg_3
 ["blocking"]
 );
-
+ */
 // bypass FT
 chrome.webRequest.onBeforeSendHeaders.addListener(
   function(details){

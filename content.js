@@ -1,10 +1,29 @@
+const window_height = document.documentElement.clientHeight;
+const doc_height = Math.max(
+  document.body.scrollHeight,
+  document.documentElement.scrollHeight,
+  document.body.offsetHeight,
+  document.documentElement.offsetHeight,
+  document.body.clientHeight,
+  document.documentElement.clientHeight
+);
+
+document.body.insertAdjacentHTML(
+  "beforeend",
+  `
+  <div id="pie-wrapper4helloword">
+<span id="label">0%</span>
+  </div>
+  `
+);
+
 function create_bubble(e) {
-    //选中文本
-    var word = document
+  //选中文本
+  var word = document
     .getSelection()
     .toString()
     .trim();
-  
+
   let urls = {
     韦氏: `http://www.learnersdictionary.com/definition/${word}`,
     Vocabulary: `https://www.vocabulary.com/dictionary/${word}`,
@@ -18,8 +37,8 @@ function create_bubble(e) {
 
   var bubble = document.createElement("div");
   bubble.setAttribute("class", "bublle4dict");
-  bubble.style.top = `${pos.y-10}px`;
-  bubble.style.left = `${pos.x-10}px`;
+  bubble.style.top = `${pos.y - 10}px`;
+  bubble.style.left = `${pos.x - 10}px`;
 
   //造个container,容纳btns;
   var box = document.createElement("ul");
@@ -54,3 +73,16 @@ function position_cursor(e) {
 window.addEventListener("dblclick", function(e) {
   setTimeout(create_bubble(e), 800);
 }); //当鼠标单击后,会出现bubble;
+
+window.addEventListener("scroll", () => {
+  // refer to https://javascript.info/size-and-scroll-window
+  let current_position = window.pageYOffset;
+  let progress = Math.ceil(
+    (current_position / (doc_height - window_height)) * 100
+  );
+  let ball = document.querySelector("#pie-wrapper4helloword #label");
+  if (ball) {
+  ball.textContent = `${progress}%`;
+  ball.style.opacity = `${progress}%`;
+  }
+});
