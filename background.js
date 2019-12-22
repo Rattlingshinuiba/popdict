@@ -1,19 +1,4 @@
 'use strict';
-//突破wsj
-/* chrome.webRequest.onBeforeRequest.addListener(function (details) {
-console.log(details);
-console.debug(details.url.indexOf("wsj"));
-  var updatedUrl;
-    updatedUrl = "https://www.outline.com/" + details.url.split('//').pop();
-  return { redirectUrl: updatedUrl};
-},
-
-//arg_2
-{urls:["*://*.wsj.com/articles/*"], types:["main_frame"]},
-//arg_3
-["blocking"]
-);
- */
 // bypass FT
 chrome.webRequest.onBeforeSendHeaders.addListener(
   function(details){
@@ -94,7 +79,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
  ['blocking', 'requestHeaders', 'extraHeaders']
  )
 
- /* 查词用韦氏
+  //查词用韦氏
 chrome.contextMenus.create({
   title: 'A_韦氏学习者词典',
   contexts: ['selection'],
@@ -102,17 +87,6 @@ chrome.contextMenus.create({
     var word = sele.selectionText;
     chrome.tabs.create({url: `http://www.learnersdictionary.com/definition/${word}`})
   }
-});*/
-
-// 查词用voca
-chrome.contextMenus.create({
-  title: 'A_VOCABULARY',
-  contexts: ['selection'],
-  onclick: sele => {
-    var word = sele.selectionText;
-    chrome.tabs.create({
-      url: `https://www.vocabulary.com/dictionary/${word}`
-    })
-  }
 });
+
 
