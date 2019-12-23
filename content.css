@@ -1,12 +1,12 @@
 #_container {
+    animation: 0.2s linear behold;
     position: absolute;
     box-sizing: border-box;
-    transition: box-shadow 0.15s ease-in-out;
     z-index: 10000;
 }
 
 #dict_link {
-    animation: 0.5s behold;
+
     text-decoration: none;
     text-align: center !important; 
     padding: 0.5rem 1rem;
