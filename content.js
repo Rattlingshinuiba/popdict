@@ -1,23 +1,7 @@
-document.head.insertAdjacentHTML(
-  "beforeend",
-  `
-    <link rel="stylesheet" href=${chrome.extension.getURL(
-      "bootstrap-4.3.1-dist/css/bootstrap.css"
-    )}>
-`
-);
-
-document.body.insertAdjacentHTML(
-  "beforeend",
-  `
-  <script src=${chrome.extension.getURL(
-    "bootstrap-4.3.1-dist/js/bootstrap.bundle.js"
-  )}></script>
-  `
-);
 
 window.onload = function() {
   //
+  document.body.insertAdjacentHTML('beforeend', `<progress id="progress4page" value="0" max="100"></progress>`)
   const window_height = document.documentElement.clientHeight;
   const doc_height = Math.max(
     document.body.scrollHeight,
@@ -34,11 +18,9 @@ window.onload = function() {
     let progress = Math.ceil(
       (current_position / (doc_height - window_height)) * 100
     );
-    progress = progress <= 100 ? progress : 100;
-    let bar = document.querySelector("#pie-wrapper4helloword");
+    let bar = document.querySelector("#progress4page");
     if (bar) {
-      bar.setAttribute("aria-valuenow", progress);
-      bar.style.width = `${progress}%`;
+      bar.value = progress;
       bar.style.opacity = `${progress}%`;
     }
   });
@@ -64,18 +46,15 @@ function create_bubble(e) {
   console.log(pos);
   //造个container,容纳btns;
   var box = document.createElement("div");
-  box.className = "btn-group btn-group-sm position-absolute shadow-lg";
-  box.role = "group";
+  box.id = "_container";
   box.style.top = `${pos.y - 10}px`;
   box.style.left = `${pos.x - 10}px`;
-  //<div class="btn-group btn-group-sm" role="group" aria-label="Basic example"></div>
-  box.setAttribute("id", "_container");
   //造小容器容纳每个<a>;
   for (const [name, url] of Object.entries(urls)) {
     box.insertAdjacentHTML(
       "beforeend",
       `
-    <a href="${url}" target="_blank" class="btn btn-secondary px-3">${name}</button>
+    <a href="${url}" id="dict_link" target="_blank">${name}</button>
         `
     );
   }
