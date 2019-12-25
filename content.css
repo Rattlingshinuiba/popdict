@@ -1,34 +1,51 @@
 #_container {
-    animation: 0.2s linear behold;
-    position: absolute;
-    box-sizing: border-box;
-    z-index: 10000;
+  animation: 0.2s linear behold;
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 10000;
 }
 
 #dict_link {
-
-    text-decoration: none;
-    text-align: center !important; 
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    color:#fff;
-    background-color: rgb(160, 155, 155);
-    border: 1px solid;    
-    transition: background-color 0.15s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-decoration: none;
+  text-align: center !important;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: rgb(160, 155, 155);
+  border: 1px solid;
+  transition: background-color 0.15s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 #dict_link:hover {
-    background-color: #646464;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  background-color: #646464;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 }
 
 #progress4page {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.highlight-selected {
+  color: #fff;
+  background-color: #007bff;
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
 }
 
 @keyframes behold {
-    from { transform: translateY(10px) }
-    to   { transform: translateY(0) }
+  from {
+    transform: translateY(10px);
   }
+  to {
+    transform: translateY(0);
+  }
+}

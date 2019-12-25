@@ -1,7 +1,13 @@
-
+document.head.insertAdjacentHTML(
+  "beforeend",
+  `<script src=${chrome.extension.getURL("jquery-3.4.1.js")}></script>`
+);
 window.onload = function() {
   //
-  document.body.insertAdjacentHTML('beforeend', `<progress id="progress4page" value="0" max="100"></progress>`)
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `<progress id="progress4page" value="0" max="100"></progress>`
+  );
   const window_height = document.documentElement.clientHeight;
   const doc_height = Math.max(
     document.body.scrollHeight,
@@ -73,6 +79,50 @@ function position_cursor(e) {
   return { x: x, y: y };
 }
 
+/* experimental feature */
+let inline_tags = ["em", "b", "code", "a"];
+function highlightSelected() {
+  let sel = window.getSelection();
+  let raw_string = sel.toString(); //in case you want to restore the style.
+  if (raw_string.trim()) {
+    //
+    let span = document.createElement("span");
+    span.className = "highlight-selected";
+    span.draggable = "true";
+    // <p>greeting! hello <em>world</em> !!!</p>
+    let anchorNodeParent = sel.anchorNode.parentNode;
+    if (anchorNodeParent == sel.focusNode.parentNode) {
+      var r = sel.getRangeAt(0);
+      r.surroundContents(span); // if "greeting! hello" is selected
+    } else if (inline_tags.includes(sel.focusNode.parentNode.localName)) {
+      //if "<p>greeting! hello <em>world</em>" is selected
+      sel.extend(sel.focusNode.parentNode.nextSibling, 1);
+      var r = sel.getRangeAt(0);
+      r.surroundContents(span);
+    } else if (inline_tags.includes(anchor_contain.localName)) {
+      sel.setBaseAndExtent(
+        anchor_contain.previousSibling,
+        anchor_contain.previousSibling.length,
+        sel.focusNode,
+        sel.focusOffset
+      );
+      var r = sel.getRangeAt(0);
+      r.surroundContents(span);
+    } else {
+      alert("暂时不能多行高亮");
+    }
+    //
+    span.ondragend = () => {
+      span = $(span);
+      span.contents().unwrap();
+    };
+  }
+}
+
 window.addEventListener("dblclick", function(e) {
   setTimeout(create_bubble(e), 800);
 });
+
+window.ondragend = function() {
+  highlightSelected();
+};

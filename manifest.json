@@ -19,7 +19,7 @@
     {
       "matches": ["<all_urls>"],
       "css": ["content.css"],
-      "js": ["content.js"]
+      "js": ["jquery-3.4.1.js","content.js"]
     },
     {
       "matches": ["*://*.medium.com/*"],
