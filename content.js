@@ -49,10 +49,9 @@ function create_bubble(e) {
 
   //得到单词坐标
   pos = position_cursor(e);
-  console.log(pos);
   //造个container,容纳btns;
   var box = document.createElement("div");
-  box.id = "_container";
+  box.id = "_dicts";
   box.style.top = `${pos.y - 10}px`;
   box.style.left = `${pos.x - 10}px`;
   //造小容器容纳每个<a>;
@@ -80,7 +79,7 @@ function position_cursor(e) {
 }
 
 /* experimental feature */
-let inline_tags = ["em", "b", "code", "a"];
+let inline_tags = ["em", "b", "code", "a", "i"];
 function highlightSelected() {
   let sel = window.getSelection();
   let raw_string = sel.toString(); //in case you want to restore the style.
@@ -89,29 +88,18 @@ function highlightSelected() {
     let span = document.createElement("span");
     span.className = "highlight-selected";
     span.draggable = "true";
-    // <p>greeting! hello <em>world</em> !!!</p>
-    let anchorNodeParent = sel.anchorNode.parentNode;
-    if (anchorNodeParent == sel.focusNode.parentNode) {
-      var r = sel.getRangeAt(0);
-      r.surroundContents(span); // if "greeting! hello" is selected
-    } else if (inline_tags.includes(sel.focusNode.parentNode.localName)) {
-      //if "<p>greeting! hello <em>world</em>" is selected
-      sel.extend(sel.focusNode.parentNode.nextSibling, 1);
-      var r = sel.getRangeAt(0);
-      r.surroundContents(span);
-    } else if (inline_tags.includes(anchor_contain.localName)) {
-      sel.setBaseAndExtent(
-        anchor_contain.previousSibling,
-        anchor_contain.previousSibling.length,
-        sel.focusNode,
-        sel.focusOffset
-      );
-      var r = sel.getRangeAt(0);
-      r.surroundContents(span);
+    if (
+      sel.anchorNode.parentNode == sel.focusNode.parentNode ||
+      inline_tags.includes(sel.anchorNode.parentNode.localName) ||
+      inline_tags.includes(sel.focusNode.parentNode.localName)
+    ) {
+      let r = sel.getRangeAt(0);
+      let frag = r.extractContents();
+      span.appendChild(frag);
+      r.insertNode(span);
     } else {
-      alert("暂时不能多行高亮");
+      alert("multi-line highlighting is not available now");
     }
-    //
     span.ondragend = () => {
       span = $(span);
       span.contents().unwrap();
